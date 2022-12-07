@@ -1,5 +1,5 @@
 # BuberDinner
-
+[Youtube playlist](https://www.youtube.com/playlist?list=PLzYkqgWkHPKBcDIP5gzLfASkQyTdy0t4k)
 ## Repository pattern
 
 **Microsoft docs**: `Repositories are classes or componets that encapsualte the logic required to acces data sources.`
