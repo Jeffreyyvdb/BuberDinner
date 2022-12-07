@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BuberDinner.Api.Controllers;
 
-[ApiController]
 [Route("auth")]
-public class AuthenticationController : ControllerBase
+public class AuthenticationController : ApiController
 {
 
     private readonly IAuthenticationService _authenticationService;
@@ -26,9 +25,9 @@ public class AuthenticationController : ControllerBase
             request.Email,
             request.Password);
 
-        return authResult.MatchFirst(
+        return authResult.Match(
             authResult => Ok(MapAuthResult(authResult)),
-            firstError => Problem(statusCode: StatusCodes.Status409Conflict, title: firstError.Description)
+            errors => Problem(errors)
             );
     }
 
@@ -40,15 +39,12 @@ public class AuthenticationController : ControllerBase
         request.Email,
         request.Password);
 
-        var response = new AuthenticationResponse(
-            authResult.user.Id,
-            authResult.user.FirstName,
-            authResult.user.LastName,
-            authResult.user.Email,
-            authResult.Token);
-
-        return Ok(response);
+        return authResult.Match(
+            authResult => Ok(MapAuthResult(authResult)),
+            errors => Problem(errors)
+            );
     }
+
     private static AuthenticationResponse MapAuthResult(AuthenticationResult authResult)
     {
         return new AuthenticationResponse(
