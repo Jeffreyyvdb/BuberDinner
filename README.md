@@ -35,3 +35,14 @@
    }
 ```
 see : [rfc specification](https://www.rfc-editor.org/rfc/rfc7807):
+
+## CQS (Command Query Seperation)
+
+**Bertrand Meyer**: `A command (procedure) does something bug does not return a result.` 
+
+**Bertrand Meyer**: `A query (function or attribute returns a result but does noet change the state.` 
+
+
+## CQRS (Command query responsibility segregation):
+
+**Greg Young**: `.. The fundamental difference is that in CQRS objects are split into two objects, one containing the Commands one containing the Queries` 
