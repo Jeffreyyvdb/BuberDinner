@@ -5,6 +5,7 @@ using BuberDinner.Contracts.Authentication;
 using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using static BuberDinner.Domain.Common.Errors;
 
 namespace BuberDinner.Api.Controllers;
 
@@ -37,7 +38,7 @@ public class AuthenticationController : ApiController
         var query = new LoginQuery(request.Email, request.Password);
         var authResult = await _mediator.Send(query);
 
-        if (authResult.IsError && authResult.FirstError == Domain.Common.Errors.Errors.Authentication.InvalidCredentials)
+        if (authResult.IsError && authResult.FirstError == Authentication.InvalidCredentials)
         {
             return Problem(
                 statusCode: StatusCodes.Status401Unauthorized,
